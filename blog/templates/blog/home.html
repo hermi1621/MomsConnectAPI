@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>MomsConnect Feed</h1>
+
+{% if user.is_authenticated %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post</button>
+</form>
+{% else %}
+<p><a href="{% url 'register' %}">Register</a> or log in to post.</p>
+{% endif %}
+
+<hr>
+
+{% for post in posts %}
+<div>
+    <strong>{{ post.user.username }}</strong>: {{ post.content }}
+    {% if post.image %}
+        <br>
+        <img src="{{ post.image.url }}" width="200">
+    {% endif %}
+    <p><small>{{ post.created_at }}</small></p>
+</div>
+{% endfor %}
+{% endblock %}
