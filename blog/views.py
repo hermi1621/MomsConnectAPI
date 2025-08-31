@@ -83,3 +83,12 @@ def delete_post(request, pk):
         return redirect('home')
     return render(request, 'blog/delete_post.html', {'post': post})
 
+
+
+from django.contrib.auth.models import User
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    posts = user.posts.all().order_by('-created_at')  # using related_name
+    return render(request, 'blog/profile.html', {'user_profile': user, 'posts': posts})
+
