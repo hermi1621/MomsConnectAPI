@@ -24,3 +24,18 @@
 {% endfor %}
 </ul>
 {% endblock %}
+
+
+{% for post in posts %}
+<div class="post">
+    <p>{{ post.user.username }}: {{ post.content }}</p>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post image">
+    {% endif %}
+    <p>{{ post.created_at }}</p>
+    {% if post.user == request.user %}
+        <a href="{% url 'edit_post' post.pk %}">Edit</a> |
+        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+    {% endif %}
+</div>
+{% endfor %}
