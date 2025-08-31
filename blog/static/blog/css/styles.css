@@ -5,12 +5,14 @@
     box-sizing: border-box;
 }
 
+/* Body */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #333;
 }
 
+/* Header */
 header {
     background-color: #0077cc;
     padding: 10px;
@@ -33,10 +35,20 @@ header nav ul li a {
     font-size: 16px;
 }
 
+/* Content */
 .content {
     margin: 20px;
 }
 
+/* Post box */
+.post {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+/* Footer */
 footer {
     background-color: #0077cc;
     color: white;
@@ -44,13 +56,3 @@ footer {
     padding: 10px;
     margin-top: 50px;
 }
-
-
-body { font-family: Arial; background-color: #f9f9f9; color: #333; }
-header { background: #333; padding: 10px; text-align: center; }
-header nav ul { list-style: none; }
-header nav ul li { display: inline; margin: 0 10px; }
-header nav ul li a { color: white; text-decoration: none; }
-.content { margin: 20px; }
-.post { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fff; }
-
