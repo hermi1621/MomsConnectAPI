@@ -1,12 +1,50 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MomsConnect</title>
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% if not request.user.is_authenticated %}
+            <li><a href="{% url 'register' %}">Register</a></li>
+            {% else %}
+            <li>Hi, {{ request.user.username }}</li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
-]
+<div class="content">
+    {% if request.user.is_authenticated %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'register' %}">register</a> to post.</p>
+    {% endif %}
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    <hr>
+
+    {% for post in posts %}
+    <div class="post">
+        <p><strong>{{ post.author.username }}</strong> says:</p>
+        <p>{{ post.content }}</p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" width="200">
+        {% endif %}
+        <p><em>{{ post.created_at }}</em></p>
+    </div>
+    {% endfor %}
+</div>
+
+<script src="{% static 'blog/js/scripts.js' %}"></script>
+</body>
+</html>
