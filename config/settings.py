@@ -17,6 +17,7 @@ STATICFILES_DIRS = [
 # Templates
 TEMPLATES = [
     {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # 👈 you need this!
         'DIRS': [BASE_DIR / 'blog/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
