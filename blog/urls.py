@@ -33,3 +33,7 @@ urlpatterns = [
     path('post/edit/<int:pk>/', views.edit_post, name='edit_post'),
     path('post/delete/<int:pk>/', views.delete_post, name='delete_post'),
 ]
+
+
+path('profile/<str:username>/', views.profile, name='profile'),
+
