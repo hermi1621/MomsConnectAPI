@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block title %}Profile - {{ user_profile.username }}{% endblock %}
+{% block content %}
+<h2>{{ user_profile.username }}'s Profile</h2>
+<p>Email: {{ user_profile.email }}</p>
+<h3>Posts:</h3>
+{% for post in posts %}
+    <div class="post">
+        <p>{{ post.content }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="Post image" width="200">
+        {% endif %}
+        <p>Created at: {{ post.created_at }}</p>
+    </div>
+{% empty %}
+    <p>No posts yet.</p>
+{% endfor %}
+{% endblock %}
