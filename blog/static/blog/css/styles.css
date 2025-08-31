@@ -45,3 +45,12 @@ footer {
     margin-top: 50px;
 }
 
+
+body { font-family: Arial; background-color: #f9f9f9; color: #333; }
+header { background: #333; padding: 10px; text-align: center; }
+header nav ul { list-style: none; }
+header nav ul li { display: inline; margin: 0 10px; }
+header nav ul li a { color: white; text-decoration: none; }
+.content { margin: 20px; }
+.post { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fff; }
+
