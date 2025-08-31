@@ -1,1 +1,35 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MomsConnect Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'posts' %}">Posts</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        <h2>Welcome to MomsConnect!</h2>
+        <p>This is a simple blog for moms to post updates.</p>
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MomsConnect Blog</p>
+    </footer>
+
+    <script src="{% static 'blog/js/scripts.js' %}"></script>
+</body>
+</html>
