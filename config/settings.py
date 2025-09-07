@@ -6,7 +6,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',  # your app
+    'blog', 
+    'rest_framework',  # add DRF
+    'rest_framework.authtoken',  # add token auth
 ]
 
 # Static files (CSS, JS)
@@ -35,6 +37,15 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 # Authentication redirects
 LOGIN_REDIRECT_URL = 'home'
