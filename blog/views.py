@@ -62,3 +62,56 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
     posts = user.posts.all().order_by('-created_at')  # using related_name='posts'
     return render(request, 'blog/profile.html', {'user_profile': user, 'posts': posts})
+
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+
+@api_view(['POST'])
+def api_login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+
+    user = authenticate(username=username, password=password)
+    if user:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'username': user.username})
+    return Response({'error': 'Invalid credentials'}, status=400)
+
+
+
+from django.contrib.auth.models import User
+from rest_framework import status
+
+@api_view(['POST'])
+def api_register(request):
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if User.objects.filter(username=username).exists():
+        return Response({'error': 'Username already exists'}, status=400)
+
+    user = User.objects.create_user(username=username, email=email, password=password)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key, 'username': user.username}, status=201)
+
+
+
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+from .models import Post
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def api_create_post(request):
+    content = request.data.get('content')
+    image = request.FILES.get('image')  # optional
+
+    post = Post.objects.create(user=request.user, content=content, image=image)
+    return Response({'id': post.id, 'content': post.content, 'username': post.user.username})
+
