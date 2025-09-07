@@ -10,14 +10,7 @@ urlpatterns = [
     path('post/edit/<int:pk>/', views.edit_post, name='edit_post'),
     path('post/delete/<int:pk>/', views.delete_post, name='delete_post'),
     path('profile/<str:username>/', views.profile, name='profile'),
-]
-
-
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    # API endpoints
+    # API 
     path('api/login/', views.api_login, name='api_login'),
     path('api/register/', views.api_register, name='api_register'),
     path('api/posts/', views.api_create_post, name='api_create_post'),
