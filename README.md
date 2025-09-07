@@ -11,7 +11,37 @@ MomsConnectAPI is a simple social platform for moms to share posts, chat, and in
 - Basic static files setup (CSS and JS)
 - Admin interface to manage users and posts
 
-## Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/hermi1621/MomsConnectAPI.git
+
+Admin Panel (Browser)
+
+URL:http://127.0.0.1:8000/admin/
+
+Method: POST
+
+URL:http://127.0.0.1:8000/accounts/api/register/
+{
+    "username": "hermela",
+    "email": "hermela@gmail.com",
+    "password": "12qw"
+}
+API Login (Get Token)
+
+Method: POST
+
+URL:http://127.0.0.1:8000/accounts/api/login/
+{
+    "username": "hermela",
+    "password": "12qw"
+}
+API Create Post
+
+Method: POST
+
+URL:http://127.0.0.1:8000/accounts/api/posts/
+{
+    "content": "This is my first post!",
+    "image": null
+}
+
+python manage.py runserver
+
